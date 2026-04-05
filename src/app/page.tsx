@@ -1,11 +1,11 @@
-import { client } from "@/sanity/client";
-import { homepageQuery } from "@/sanity/queries";
 import ProjectStage from "@/components/ProjectStage";
 
-export default async function HomePage() {
-  const data = await client.fetch(homepageQuery);
+export const metadata = {
+  title: "RIGHT Architects",
+  description:
+    "Architecture studio based in Nilambur, Kerala — residential, commercial, interiors, and greenscape.",
+};
 
-  return (
-    <ProjectStage />
-  );
+export default function HomePage() {
+  return <ProjectStage />;
 }

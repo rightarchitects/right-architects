@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Get in touch with RIGHT Architects for project collaborations, architecture and interior inquiries.",
+};
 
 export default function ContactPage() {
   return (

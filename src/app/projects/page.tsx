@@ -1,7 +1,22 @@
-// app/projects/page.tsx
-import { client } from "@/sanity/client";
+import type { Metadata } from "next";
+import { client } from "@/sanity/lib/client";
+import { projectsQuery } from "@/sanity/queries";
 import Header from "@/components/Header";
 import ProjectCard from "@/components/ProjectCard";
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description:
+    "Browse architecture, interior, greenscape, and furniture projects by RIGHT Architects.",
+};
+
+export const revalidate = 60;
+
+type SanityImageAsset = {
+  _type: "image";
+  asset: { _ref: string; _type: "reference" };
+  hotspot?: object;
+};
 
 type Project = {
   _id: string;
@@ -10,27 +25,14 @@ type Project = {
   year: number;
   location: string;
   category: string;
-  mainImage: any;
-  gallery?: any[];         // 👈 added
+  mainImage: SanityImageAsset;
+  gallery?: SanityImageAsset[];
 };
 
-async function getProjects(): Promise<Project[]> {
-  return client.fetch(`
-    *[_type == "project"] | order(year desc) {
-      _id,
-      title,
-      slug,
-      year,
-      location,
-      category,
-      mainImage,
-      gallery           
-    }
-  `);
-}
-
 export default async function ProjectsPage() {
-  const projects = await getProjects();
+  const projects: Project[] = await client.fetch(projectsQuery, {}, {
+    next: { revalidate: 60 },
+  });
 
   return (
     <main className="min-h-screen bg-[#f3f3f3] text-black">
