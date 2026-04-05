@@ -7,7 +7,7 @@ export default function ContactPage() {
       <Header />
 
       {/* Top spacing */}
-      <div className="h-32 md:h-36 lg:h-56" />
+      <div className="h-46 md:h-54 lg:h-56" />
 
       {/* Heading */}
       <section className="mx-auto max-w-4xl px-6 text-center">

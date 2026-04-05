@@ -1,8 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
+// app/projects/page.tsx
 import { client } from "@/sanity/client";
-import { urlFor } from "@/sanity/image";
 import Header from "@/components/Header";
+import ProjectCard from "@/components/ProjectCard";
 
 type Project = {
   _id: string;
@@ -12,6 +11,7 @@ type Project = {
   location: string;
   category: string;
   mainImage: any;
+  gallery?: any[];         // 👈 added
 };
 
 async function getProjects(): Promise<Project[]> {
@@ -23,7 +23,8 @@ async function getProjects(): Promise<Project[]> {
       year,
       location,
       category,
-      mainImage
+      mainImage,
+      gallery           
     }
   `);
 }
@@ -33,59 +34,15 @@ export default async function ProjectsPage() {
 
   return (
     <main className="min-h-screen bg-[#f3f3f3] text-black">
-
-      {/* Header */}
       <Header />
-
-      {/* Offset below navbar */}
-      <div className="h-32 md:h-40" />
-
-      {/* Grid container */}
+      <div className="h-46 md:h-54 lg:h-56" />
       <section className="mx-auto max-w-[1800px] px-6 pb-24">
-
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
-
           {projects.map((project) => (
-            <Link
-  key={project._id}
-  href={`/projects/${project.slug.current}`}
-  className="group"
->
-              <div className="relative overflow-hidden rounded-2xl bg-neutral-200 shadow-sm">
-
-                {/* Square image */}
-                <div className="relative w-full aspect-square">
-                  {project.mainImage?.asset && (
-                    <Image
-                      src={urlFor(project.mainImage)
-                        .width(1000)
-                        .height(1000)
-                        .url()}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  )}
-                </div>
-
-                {/* Bottom gradient overlay */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 md:h-20 lg:h-24 bg-gradient-to-t from-white/90 via-white/60 to-transparent" />
-
-                {/* Project title */}
-                <div className="absolute bottom-5 left-6">
-                  <h2 className="text-sm md:text-base lg:text-lg font-light tracking-tight">
-                    {project.title}
-                  </h2>
-                </div>
-
-              </div>
-            </Link>
+            <ProjectCard key={project._id} project={project} />
           ))}
-
         </div>
-
       </section>
-
     </main>
   );
 }

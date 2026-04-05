@@ -34,7 +34,7 @@ export default function ProfilePage() {
       <Header />
 
       {/* Top spacing */}
-      <div className="h-32 md:h-40" />
+      <div className="h-46 md:h-54 lg:h-50" />
 
       {/* Main Section */}
       <section className="mx-auto max-w-7xl px-6 md:px-10 lg:px-6">
