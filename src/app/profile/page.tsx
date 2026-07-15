@@ -5,24 +5,29 @@ import Image from "next/image";
 
 const team = [
   {
-    name: "muhammed hisham",
-    role: "it consultant",
-    image: "/team/member1.jpg",
+    name: "Nihal",
+    role: "design head, ceo",
+    image: "/team/member1.PNG",
   },
   {
-    name: "rinshad",
-    role: "backend developer",
+    name: "nida k",
+    role: "junior architect",
     image: "/team/member2.jpg",
   },
   {
-    name: "chaithanya pk",
-    role: "it consultant",
-    image: "/team/member3.jpg",
+    name: "shinan",
+    role: "interior designer",
+    image: "/team/member3.jpeg",
   },
   {
-    name: "krishna priya c",
-    role: "human resource",
-    image: "/team/member4.jpg",
+    name: "anshida",
+    role: "interior designer",
+    image: "/team/member4.jpeg",
+  },
+  {
+    name: "ajwad",
+    role: "digital marketing",
+    image: "/team/member5.jpeg",
   },
 ];
 
@@ -149,13 +154,29 @@ export default function ProfilePage() {
 
   </div>
 
-  {/* Carousel */}
-  <div className="flex gap-4 md:gap-5 lg:gap-6 overflow-x-scroll scrollbar-hide pb-3 md:pb-4 snap-x snap-mandatory scroll-smooth">
+  {/*
+    Carousel on mobile/tablet, static grid on desktop.
+    Padding lives ON the scroll track (with a matching negative margin
+    to stay aligned with the section) so the last card gets real
+    trailing space instead of being clipped at the container edge.
+  */}
+  <div
+    className="
+      flex gap-4 md:gap-5 overflow-x-scroll scrollbar-hide pb-3 md:pb-4
+      snap-x snap-mandatory scroll-smooth
+      px-6 md:px-8 -mx-6 md:-mx-8
+
+      lg:grid lg:grid-cols-5 lg:gap-6 lg:overflow-visible lg:px-0 lg:mx-0 lg:pb-0
+    "
+  >
 
     {team.map((member, index) => (
       <div
         key={index}
-        className="min-w-[160px] md:min-w-[200px] lg:min-w-[240px] snap-start"
+        className="
+          w-[160px] md:w-[200px] shrink-0 snap-start
+          lg:w-auto lg:shrink lg:snap-align-none
+        "
       >
 
         <div className="relative aspect-[3/4] overflow-hidden rounded-lg md:rounded-xl bg-neutral-100">
